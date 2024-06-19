@@ -1,0 +1,101 @@
+[
+    {
+        "id": 1,
+        "license": "CA1234567890",
+        "brand": "Mercedes",
+        "model": "G Class",
+        "airConditioner": true,
+        "year": "2015",
+        "pricePerDay": "333"
+    },
+    {
+        "id": 2,
+        "brand": "Toyota",
+        "model": "Corolla",
+        "year": 2019,
+        "pricePerDay": 80,
+        "airConditioner": true,
+        "license": "NY9876543210"
+    },
+    {
+        "id": 3,
+        "brand": "Honda",
+        "model": "Civic",
+        "year": 2020,
+        "pricePerDay": 90,
+        "airConditioner": true,
+        "license": "TX4567890123"
+    },
+    {
+        "id": 4,
+        "brand": "Ford",
+        "model": "Mustang",
+        "year": 2018,
+        "pricePerDay": 200,
+        "airConditioner": true,
+        "license": "FL2345678901"
+    },
+    {
+        "id": 5,
+        "brand": "BMW",
+        "model": "X5",
+        "year": 2017,
+        "pricePerDay": 180,
+        "airConditioner": true,
+        "license": "WA3456789012"
+    },
+    {
+        "id": 6,
+        "brand": "Audi",
+        "model": "A4",
+        "year": 2021,
+        "pricePerDay": 120,
+        "airConditioner": true,
+        "license": "MA7890123456"
+    },
+    {
+        "id": 7,
+        "brand": "Lexus",
+        "model": "RX 350",
+        "year": 2019,
+        "pricePerDay": 160,
+        "airConditioner": true,
+        "license": "NJ8901234567"
+    },
+    {
+        "id": 8,
+        "brand": "Tesla",
+        "model": "Model 3",
+        "year": 2022,
+        "pricePerDay": 250,
+        "airConditioner": true,
+        "license": "IL0123456789"
+    },
+    {
+        "id": 9,
+        "brand": "Chevrolet",
+        "model": "Camaro",
+        "year": 2016,
+        "pricePerDay": 190,
+        "airConditioner": true,
+        "license": "AZ3456789012"
+    },
+    {
+        "id": 10,
+        "brand": "Subaru",
+        "model": "Forester",
+        "year": 2019,
+        "pricePerDay": 110,
+        "airConditioner": true,
+        "license": "NV4567890123"
+    },
+    {
+        "id": 11,
+        "brand": "Volvo",
+        "model": "XC90",
+        "year": 2020,
+        "pricePerDay": 220,
+        "airConditioner": true,
+        "license": "GA5678901234"
+    }
+]

@@ -1,0 +1,165 @@
+const CarModel = require("../models/CarModel");
+class CarController {
+
+    static async index(req, res) {
+        // getAllCars
+        res.json(CarModel.all());
+    }
+
+    static async show(req, res) {
+        let carId = parseInt(req.params.identifier);
+        let carLicense = null;
+        (req.params.identifier instanceof Number) ?
+            carId = req.params.identifier : carLicense = req.params.identifier;
+        let car = CarModel.find(carId, carLicense);
+        if (car) return res.end(JSON.stringify(CarModel.find(carId, carLicense)));
+        return res.status(404).end(`Not such a car with ${carId || carLicense}`)
+    }
+
+    static async rented(req, res) {
+        // getAll cars that are rented
+        res.json(CarModel.rented());
+    }
+
+    static async search(req, res){
+        let allCars = CarModel.all();
+        return res.json(allCars.filter(car =>{
+            if(car.model.includes(req.params.identifier) || 
+            car.brand.includes(req.params.identifier))
+            return car;
+        }));
+    }
+
+    static async searchRented(req, res){
+        let rentedCars = CarModel.rented();
+        return res.json(rentedCars.filter(car =>{
+            if(car.personalData.includes(req.params.identifier) || 
+                car.license.includes(req.params.identifier) ||
+                car.idCard.includes(req.params.identifier)
+            ) 
+            return car;
+        }));
+    }
+
+    static async sort(req, res) {
+        let whatToSort = [
+            "reset",
+            "pricePerDay",
+            "model"
+        ]
+        if(req.query.reset){
+            return res.json(CarModel.all());
+        }
+
+        let sortCriteria = [];
+        let sortOrders = [];
+
+        try {
+            // Iterate over query parameters to build sort criteria and orders
+            for (let queryParam in req.query) {
+                let [criterium, order] = req.query[queryParam].split(":");
+                if (!whatToSort.includes(criterium)) {
+                    throw new Error(`We do not have implemented sort by ${criterium}`);
+                }
+                if (!['asc', 'desc'].includes(order)) {
+                    throw new Error(`Invalid sort order for ${criterium}. Must be 'asc' or 'desc'`);
+                }
+                sortCriteria.push(criterium);
+                sortOrders.push(order);
+            }
+        } catch (error) {
+            return res.status(400).json({ "message": error.message });
+        }
+
+        let allCars = CarModel.all();
+
+        // Function to compare two items based on multiple criteria
+        function compare(a, b, criteria, orders) {
+            for (let i = 0; i < criteria.length; i++) {
+                if (a[criteria[i]] > b[criteria[i]]) {
+                    return orders[i] === 'asc' ? 1 : -1;
+                }
+                if (a[criteria[i]] < b[criteria[i]]) {
+                    return orders[i] === 'asc' ? -1 : 1;
+                }
+            }
+            return 0;
+        }
+
+        let sortedCars = allCars.sort((a, b) => compare(a, b, sortCriteria, sortOrders));
+        return res.json(sortedCars);
+    }
+
+    static bestSelling(req, res){
+        let numberOfCars = req.params.numberOfCars;
+        return res.json(CarModel.bestSelling(numberOfCars));
+    }
+
+    // PATCH CONTROLLERS
+    static async update(req, res) {
+        CarModel.update(req.car);
+        res.json({"message":"Succesfully edit car"});
+    }
+
+    static async updateRent(req, res){
+        CarModel.updateRent(req.body);
+        res.json({"message":"Succesfully edit rented data"});
+    }
+
+    // POST CONTROLLERS
+    static async store(req, res) {
+        // first validate middleware CarValidation.store
+        // call CarModel and insert value in cars.json
+        CarModel.store({...req.body, id: CarController.generateIdCar()});
+        res.json([{"message":"Succesfully added car"}]);
+    }
+
+    static async accept(req, res) {
+
+        const calculateTotalPrice = (startDate, returnDate, pricePerDay) =>{
+            let mSeconds = new Date(returnDate).getTime() - new Date(startDate).getTime();
+            let days = mSeconds / (1000 * 60 * 60 * 24);
+            return days * pricePerDay;
+        }
+
+        let stat = {
+            "license": req.car.license,
+            "startDate": req.car.startDate,
+            "returnDate": req.car.returnDate,
+            "pricePerDay": req.car.pricePerDay,
+            "totalPrice": calculateTotalPrice(req.car.startDate, req.car.returnDate, req.car.pricePerDay),
+            "idCard": req.car.idCard,
+            "personalData": req.car.personalData,
+            "review": req.car.review,
+            "userRating": req.car.userRating,
+        }
+        
+        CarModel.insertStat(stat);
+        CarModel.deleteRented(req.car.license);
+        return res.json({"message": "Succesfully returned car"});
+    }
+
+    static async rent(req, res) {
+        // validation is done 
+        // call CarModel insert value of id in rentedCar
+        CarModel.rent(req.body);
+        res.json({ "message": "Successfully rented car" });
+    }
+
+    static async destroy(req, res) {
+        CarModel.destroy(req.carLicense);
+        res.json([{"message":"Succesfully deleted car"}]);
+    }
+
+    static generateIdCar()
+    {
+        let maxId = 0;
+        CarModel.all().map((car)=>{
+            if(car.id > maxId)
+                maxId = car.id;
+        });
+        return ++maxId;
+    }
+}
+
+module.exports = CarController;
