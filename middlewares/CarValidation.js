@@ -10,6 +10,9 @@ class CarValidation
             if(CarModel.isRented(req.body.license) === true){
                 throw new Error("This car is rented");
             }
+            if(new Date(req.body.returnDate).getTime() - new Date(req.body.startDate).getTime() < 0){
+                throw new Error("Return date must be after start date");
+            }
         } catch (error) {
             return res.status(400).json([{"message":error.message}]);
         }
