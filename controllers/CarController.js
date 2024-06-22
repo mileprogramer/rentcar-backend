@@ -1,9 +1,35 @@
 const CarModel = require("../models/CarModel");
+const Pagination = require("../Services/Paginate");
 class CarController {
 
     static async index(req, res) {
         // getAllCars
-        res.json(CarModel.all());
+        // from res.params take a number of page
+        // per page return 10
+        try{
+            let page = req.query.page;
+            if(!page){
+                page = 0;
+            } else  page = parseInt(page);
+
+            let carPerPage = 10;
+            let allCars = CarModel.all();
+            let totalCars = allCars.length;
+            allCars = Pagination.make(allCars, page, carPerPage);
+
+            if(allCars.length === 0){
+                throw new Error("There is not such a page");
+            }
+            res.json({
+                paginateData: {
+                    "totalCars": totalCars,
+                    "carsPerPage": carPerPage,
+                },
+                cars: allCars,
+            })
+        }catch (error){
+            res.status(404).json([{"message":error.message}])
+        }
     }
 
     static async show(req, res) {
@@ -19,6 +45,11 @@ class CarController {
     static async rented(req, res) {
         // getAll cars that are rented
         res.json(CarModel.rented());
+    }
+
+    static async historyRented(req, res){
+        // show all cars that were rented and returned // statistics
+        res.json(CarModel.historyRented());
     }
 
     static async search(req, res){
@@ -38,6 +69,21 @@ class CarController {
                 car.idCard.includes(req.params.identifier)
             ) 
             return car;
+        }));
+    }
+
+    static searchHistoryRented(req, res){
+        let statisticts = CarModel.historyRented();
+        let startDate = new Date(req.params.startDate).getTime();
+        let endDate = new Date(req.params.endDate).getTime()
+        let license = req.params.license;
+
+        return res.json(statisticts.filter(rentedData =>{
+            if(rentedData.license !== license) return ;
+            let carStartDate = new Date(rentedData.startDate).getTime();
+            let carRentedDate = new Date(rentedData.returnDate).getTime();
+            return (carStartDate >=  startDate && 
+                    carRentedDate <= endDate)
         }));
     }
 
@@ -115,9 +161,15 @@ class CarController {
     }
 
     static async accept(req, res) {
+        let today = new Date();
+
+        function todayDate(){
+            let month = new Date().getMonth() + 1;
+            return new Date().getFullYear() + "-" + month + "-"+ new Date().getDate()
+        }
 
         const calculateTotalPrice = (startDate, returnDate, pricePerDay) =>{
-            let mSeconds = new Date(returnDate).getTime() - new Date(startDate).getTime();
+            let mSeconds = returnDate.getTime() - new Date(startDate).getTime();
             let days = mSeconds / (1000 * 60 * 60 * 24);
             return days * pricePerDay;
         }
@@ -125,11 +177,12 @@ class CarController {
         let stat = {
             "license": req.car.license,
             "startDate": req.car.startDate,
-            "returnDate": req.car.returnDate,
+            "returnDate": todayDate(),
             "pricePerDay": req.car.pricePerDay,
-            "totalPrice": calculateTotalPrice(req.car.startDate, req.car.returnDate, req.car.pricePerDay),
+            "totalPrice": calculateTotalPrice(req.car.startDate, today, req.car.pricePerDay),
             "idCard": req.car.idCard,
             "personalData": req.car.personalData,
+            "phoneNumber": req.car.phoneNumber,
             "review": req.car.review,
             "userRating": req.car.userRating,
         }
