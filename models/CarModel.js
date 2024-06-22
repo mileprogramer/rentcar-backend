@@ -3,14 +3,14 @@ class Car
     static ratings = this.calculateRating();
     static all()
     {
+        // return all cars
         // add property is car available or not
         // add average rating
         // add property when car will be returned
-        // return all cars
         let allCars = JSON.parse(this.#readCars());
         let rentedCars = JSON.parse(this.#readRentedCars());
         let rentedCarsLicense = rentedCars.map(car => car.license);
-        return allCars.map((car)=>{
+        return allCars.map((car, index)=>{
             car.available = true;
             car.averageRating = this.getAverageRating(car.license);
             if(rentedCarsLicense.includes(car.license)){
@@ -41,6 +41,11 @@ class Car
                 "phoneNumber": rentedCar.phoneNumber,
             }
         });
+    }
+
+    static historyRented()
+    {
+        return JSON.parse(this.#readStats());
     }
 
     static find(id, license)
