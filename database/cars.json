@@ -1,101 +1,383 @@
 [
-    {
-        "id": 1,
-        "license": "CA1234567890",
-        "brand": "Mercedes",
-        "model": "G Class",
-        "airConditioner": true,
-        "year": "2015",
-        "pricePerDay": "333"
-    },
-    {
-        "id": 2,
-        "brand": "Toyota",
-        "model": "Corolla",
-        "year": 2019,
-        "pricePerDay": 80,
-        "airConditioner": true,
-        "license": "NY9876543210"
-    },
-    {
-        "id": 3,
-        "brand": "Honda",
-        "model": "Civic",
-        "year": 2020,
-        "pricePerDay": 90,
-        "airConditioner": true,
-        "license": "TX4567890123"
-    },
-    {
-        "id": 4,
-        "brand": "Ford",
-        "model": "Mustang",
-        "year": 2018,
-        "pricePerDay": 200,
-        "airConditioner": true,
-        "license": "FL2345678901"
-    },
-    {
-        "id": 5,
-        "brand": "BMW",
-        "model": "X5",
-        "year": 2017,
-        "pricePerDay": 180,
-        "airConditioner": true,
-        "license": "WA3456789012"
-    },
-    {
-        "id": 6,
-        "brand": "Audi",
-        "model": "A4",
-        "year": 2021,
-        "pricePerDay": 120,
-        "airConditioner": true,
-        "license": "MA7890123456"
-    },
-    {
-        "id": 7,
-        "brand": "Lexus",
-        "model": "RX 350",
-        "year": 2019,
-        "pricePerDay": 160,
-        "airConditioner": true,
-        "license": "NJ8901234567"
-    },
-    {
-        "id": 8,
-        "brand": "Tesla",
-        "model": "Model 3",
-        "year": 2022,
-        "pricePerDay": 250,
-        "airConditioner": true,
-        "license": "IL0123456789"
-    },
-    {
-        "id": 9,
-        "brand": "Chevrolet",
-        "model": "Camaro",
-        "year": 2016,
-        "pricePerDay": 190,
-        "airConditioner": true,
-        "license": "AZ3456789012"
-    },
-    {
-        "id": 10,
-        "brand": "Subaru",
-        "model": "Forester",
-        "year": 2019,
-        "pricePerDay": 110,
-        "airConditioner": true,
-        "license": "NV4567890123"
-    },
-    {
-        "id": 11,
-        "brand": "Volvo",
-        "model": "XC90",
-        "year": 2020,
-        "pricePerDay": 220,
-        "airConditioner": true,
-        "license": "GA5678901234"
-    }
+  {
+    "id": 1,
+    "license": "CA1234567890",
+    "brand": "Mercedes",
+    "model": "G Class",
+    "airConditioner": true,
+    "year": "2015",
+    "pricePerDay": "333"
+  },
+  {
+    "id": 2,
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2019,
+    "pricePerDay": 80,
+    "airConditioner": true,
+    "license": "NY9876543210"
+  },
+  {
+    "id": 3,
+    "brand": "Honda",
+    "model": "Civic",
+    "year": 2020,
+    "pricePerDay": 90,
+    "airConditioner": true,
+    "license": "TX4567890123"
+  },
+  {
+    "id": 4,
+    "brand": "Ford",
+    "model": "Mustang",
+    "year": 2018,
+    "pricePerDay": 200,
+    "airConditioner": true,
+    "license": "FL2345678901"
+  },
+  {
+    "id": 5,
+    "brand": "BMW",
+    "model": "X5",
+    "year": 2017,
+    "pricePerDay": 180,
+    "airConditioner": true,
+    "license": "WA3456789012"
+  },
+  {
+    "id": 6,
+    "brand": "Audi",
+    "model": "A4",
+    "year": 2021,
+    "pricePerDay": 120,
+    "airConditioner": true,
+    "license": "MA7890123456"
+  },
+  {
+    "id": 7,
+    "brand": "Lexus",
+    "model": "RX 350",
+    "year": 2019,
+    "pricePerDay": 160,
+    "airConditioner": true,
+    "license": "NJ8901234567"
+  },
+  {
+    "id": 8,
+    "brand": "Tesla",
+    "model": "Model 3",
+    "year": 2022,
+    "pricePerDay": 250,
+    "airConditioner": true,
+    "license": "IL0123456789"
+  },
+  {
+    "id": 9,
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2016,
+    "pricePerDay": 190,
+    "airConditioner": true,
+    "license": "AZ3456789012"
+  },
+  {
+    "id": 10,
+    "brand": "Subaru",
+    "model": "Forester",
+    "year": 2019,
+    "pricePerDay": 110,
+    "airConditioner": true,
+    "license": "NV4567890123"
+  },
+  {
+    "id": 11,
+    "brand": "Volvo",
+    "model": "XC90",
+    "year": 2020,
+    "pricePerDay": 220,
+    "airConditioner": true,
+    "license": "GA5678901234"
+  },
+  {
+    "license": "VA147HP",
+    "brand": "Ford",
+    "model": "Fiesta",
+    "year": "2009",
+    "airConditioner": true,
+    "pricePerDay": "23",
+    "id": 12
+  },
+  {
+    "id": 26,
+    "license": "NY9962291427",
+    "brand": "Mercedes",
+    "model": "G Class",
+    "airConditioner": true,
+    "year": "2017",
+    "pricePerDay": "174"
+  },
+  {
+    "id": 27,
+    "license": "NY2743090991",
+    "brand": "Audi",
+    "model": "Q7",
+    "airConditioner": false,
+    "year": "2013",
+    "pricePerDay": "308"
+  },
+  {
+    "id": 28,
+    "license": "CA8419472173",
+    "brand": "Ford",
+    "model": "Explorer",
+    "airConditioner": true,
+    "year": "2011",
+    "pricePerDay": "263"
+  },
+  {
+    "id": 29,
+    "license": "NY9887899016",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "airConditioner": true,
+    "year": "2011",
+    "pricePerDay": "84"
+  },
+  {
+    "id": 30,
+    "license": "CA8205795651",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "airConditioner": true,
+    "year": "2014",
+    "pricePerDay": "143"
+  },
+  {
+    "id": 31,
+    "license": "CA3720010099",
+    "brand": "Ford",
+    "model": "Explorer",
+    "airConditioner": true,
+    "year": "2004",
+    "pricePerDay": "226"
+  },
+  {
+    "id": 32,
+    "license": "TX8239119408",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "airConditioner": true,
+    "year": "2007",
+    "pricePerDay": "447"
+  },
+  {
+    "id": 33,
+    "license": "NY6315872822",
+    "brand": "Range Rover",
+    "model": "Evoque",
+    "airConditioner": false,
+    "year": "2016",
+    "pricePerDay": "358"
+  },
+  {
+    "id": 34,
+    "license": "NY6229851633",
+    "brand": "Lexus",
+    "model": "RX",
+    "airConditioner": false,
+    "year": "2009",
+    "pricePerDay": "237"
+  },
+  {
+    "id": 35,
+    "license": "NY0792228363",
+    "brand": "Lexus",
+    "model": "RX",
+    "airConditioner": false,
+    "year": "2000",
+    "pricePerDay": "366"
+  },
+  {
+    "id": 36,
+    "license": "TX5745232221",
+    "brand": "BMW",
+    "model": "X5",
+    "airConditioner": true,
+    "year": "2023",
+    "pricePerDay": "106"
+  },
+  {
+    "id": 37,
+    "license": "TX8876296092",
+    "brand": "Mercedes",
+    "model": "G Class",
+    "airConditioner": false,
+    "year": "2004",
+    "pricePerDay": "401"
+  },
+  {
+    "id": 38,
+    "license": "NY8803420555",
+    "brand": "Audi",
+    "model": "Q7",
+    "airConditioner": false,
+    "year": "2011",
+    "pricePerDay": "219"
+  },
+  {
+    "id": 39,
+    "license": "CA7443404290",
+    "brand": "Jeep",
+    "model": "Wrangler",
+    "airConditioner": false,
+    "year": "2005",
+    "pricePerDay": "103"
+  },
+  {
+    "id": 40,
+    "license": "TX1275044512",
+    "brand": "Mercedes",
+    "model": "G Class",
+    "airConditioner": false,
+    "year": "2002",
+    "pricePerDay": "245"
+  },
+  {
+    "id": 41,
+    "license": "TX7896432173",
+    "brand": "Ford",
+    "model": "Explorer",
+    "airConditioner": false,
+    "year": "2005",
+    "pricePerDay": "189"
+  },
+  {
+    "id": 42,
+    "license": "NY4672838730",
+    "brand": "Jeep",
+    "model": "Wrangler",
+    "airConditioner": false,
+    "year": "2010",
+    "pricePerDay": "60"
+  },
+  {
+    "id": 43,
+    "license": "NY5150517615",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "airConditioner": true,
+    "year": "2002",
+    "pricePerDay": "351"
+  },
+  {
+    "id": 44,
+    "license": "TX2756307110",
+    "brand": "Mercedes",
+    "model": "G Class",
+    "airConditioner": true,
+    "year": "2022",
+    "pricePerDay": "109"
+  },
+  {
+    "id": 45,
+    "license": "TX2546595134",
+    "brand": "Range Rover",
+    "model": "Evoque",
+    "airConditioner": false,
+    "year": "2009",
+    "pricePerDay": "279"
+  },
+  {
+    "id": 46,
+    "license": "GA1234567890",
+    "brand": "Nissan",
+    "model": "Altima",
+    "airConditioner": true,
+    "year": "2016",
+    "pricePerDay": "75"
+  },
+  {
+    "id": 47,
+    "license": "OH9876543210",
+    "brand": "Mazda",
+    "model": "CX-5",
+    "airConditioner": true,
+    "year": "2018",
+    "pricePerDay": "85"
+  },
+  {
+    "id": 48,
+    "license": "VA4567890123",
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "airConditioner": true,
+    "year": "2017",
+    "pricePerDay": "70",
+    "returnDate": "2024-07-10"
+  },
+  {
+    "id": 49,
+    "license": "PA3456789012",
+    "brand": "Kia",
+    "model": "Sorento",
+    "airConditioner": true,
+    "year": "2019",
+    "pricePerDay": "90"
+  },
+  {
+    "id": 50,
+    "license": "MI2345678901",
+    "brand": "Volkswagen",
+    "model": "Golf",
+    "airConditioner": true,
+    "year": "2020",
+    "pricePerDay": "95",
+    "returnDate": "2024-07-12"
+  },
+  {
+    "id": 51,
+    "license": "NC3456789012",
+    "brand": "Jeep",
+    "model": "Grand Cherokee",
+    "airConditioner": true,
+    "year": "2018",
+    "pricePerDay": "120"
+  },
+  {
+    "id": 52,
+    "license": "SC4567890123",
+    "brand": "Subaru",
+    "model": "Outback",
+    "airConditioner": true,
+    "year": "2021",
+    "pricePerDay": "110"
+  },
+  {
+    "id": 53,
+    "license": "TN5678901234",
+    "brand": "Volvo",
+    "model": "XC60",
+    "airConditioner": true,
+    "year": "2019",
+    "pricePerDay": "130",
+    "returnDate": "2024-07-08"
+  },
+  {
+    "id": 54,
+    "license": "KY6789012345",
+    "brand": "Land Rover",
+    "model": "Discovery",
+    "airConditioner": true,
+    "year": "2017",
+    "pricePerDay": "140"
+  },
+  {
+    "id": 55,
+    "license": "MO7890123456",
+    "brand": "Porsche",
+    "model": "Cayenne",
+    "airConditioner": true,
+    "year": "2022",
+    "pricePerDay": "250"
+  }
 ]
