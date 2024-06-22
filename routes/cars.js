@@ -5,11 +5,13 @@ const carValidation = require("../middlewares/carValidation");
 
 router.get("/", carController.index);
 router.get("/rented", carController.rented);
+router.get("/history-rented", carController.historyRented);
 router.get("/sort", carController.sort);
 router.get("/search/:identifier", carController.search);
 router.get("/search-rented/:identifier", carController.searchRented);
+router.get("/search-history-rented/:license/:startDate/:endDate", carController.searchHistoryRented);
 router.get("/best-selling/:numberOfCars", carController.bestSelling);
-router.get("/:identifier", carController.show);
+router.get("/show/:identifier", carController.show);
 
 router.post("/rent", carValidation.rent ,carController.rent);
 router.post("/add", carValidation.store ,carController.store);
