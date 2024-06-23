@@ -7,20 +7,12 @@ class CarController {
         // from res.params take a number of page
         // per page return 10
         try{
-            let page = req.query.page;
-            if(!page){
-                page = 0;
-            } else  page = parseInt(page);
-
             let carPerPage = 10;
             let allCars = CarModel.all();
             let totalCars = allCars.length;
-            allCars = Pagination.make(allCars, page, carPerPage);
+            allCars = Pagination.make(allCars, req.query.page, carPerPage);
 
-            if(allCars.length === 0){
-                throw new Error("There is not such a page");
-            }
-            res.json({
+            return res.json({
                 paginateData: {
                     "totalCars": totalCars,
                     "carsPerPage": carPerPage,
@@ -28,7 +20,8 @@ class CarController {
                 cars: allCars,
             })
         }catch (error){
-            res.status(404).json([{"message":error.message}])
+            console.log(error);
+            res.status(error.status).json([{"message":error.message}])
         }
     }
 
