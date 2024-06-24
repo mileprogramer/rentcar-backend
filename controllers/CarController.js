@@ -68,7 +68,6 @@ class CarController {
                 car.brand.includes(req.params.identifier))
                 return car;
         })
-        if(data.length === 0) return res.status(400).json({"message": "There is not such a car by this term"});
         try{
             let carsPagination = Pagination.make(data, req.query.page, 10)
             return res.json({
