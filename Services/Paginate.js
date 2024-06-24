@@ -4,7 +4,7 @@ class Paginataion{
 
     static make(dataToPaginate, page, perPage)
     {
-        page = this.validate(page);
+        page = this.validate(dataToPaginate, page);
         let startIndex = perPage * page;
         let data = dataToPaginate.filter((element, index) =>{
             if(index >= startIndex && perPage !== 0){
@@ -21,8 +21,14 @@ class Paginataion{
         return data;
     }
 
-    static validate(page)
+    static validate(data, page)
     {
+        if(data.length === 0){
+            throw new HttpError({
+                "status": 404,
+                "message": "There is not data for that term"
+            })
+        }
         if(!page){
             page = 0;
         } else if(page > 0){
