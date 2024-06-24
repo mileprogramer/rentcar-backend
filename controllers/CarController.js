@@ -42,16 +42,47 @@ class CarController {
 
     static async historyRented(req, res){
         // show all cars that were rented and returned // statistics
-        res.json(CarModel.historyRented());
+        try{
+            let carPerPage = 10;
+            let rentedCars = CarModel.historyRented();
+            let totalCars = rentedCars.length;
+            rentedCars = Pagination.make(rentedCars, req.query.page, carPerPage);
+
+            return res.json({
+                paginateData: {
+                    "totalCars": totalCars,
+                    "carsPerPage": carPerPage,
+                },
+                cars: rentedCars,
+            })
+        }catch (error){
+            console.log(error);
+            res.status(error.status).json([{"message":error.message}])
+        }
     }
 
     static async search(req, res){
         let allCars = CarModel.all();
-        return res.json(allCars.filter(car =>{
-            if(car.model.includes(req.params.identifier) || 
-            car.brand.includes(req.params.identifier))
-            return car;
-        }));
+        let data = allCars.filter(car =>{
+            if(car.model.includes(req.params.identifier) ||
+                car.brand.includes(req.params.identifier))
+                return car;
+        })
+        if(data.length === 0) return res.status(400).json({"message": "There is not such a car by this term"});
+        try{
+            let carsPagination = Pagination.make(data, req.query.page, 10)
+            return res.json({
+                paginateData: {
+                    "totalCars": data.length,
+                    "carsPerPage": 10,
+                },
+                cars: carsPagination,
+            })
+        }
+        catch (error){
+            console.log(error);
+            return res.status(error.status).json(error.message);
+        }
     }
 
     static async searchRented(req, res){
