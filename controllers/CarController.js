@@ -102,13 +102,28 @@ class CarController {
         let endDate = new Date(req.params.endDate).getTime()
         let license = req.params.license;
 
-        return res.json(statisticts.filter(rentedData =>{
+        let statistictsData = statisticts.filter(rentedData =>{
             if(rentedData.license !== license) return ;
             let carStartDate = new Date(rentedData.startDate).getTime();
             let carRentedDate = new Date(rentedData.returnDate).getTime();
             return (carStartDate >=  startDate && 
                     carRentedDate <= endDate)
-        }));
+        });
+
+        try{
+            let dataPagination = Pagination.make(statistictsData, req.query.page, 10);
+            return res.json({
+                paginateData: {
+                    "totalCars": dataPagination.length,
+                    "carsPerPage": 10,
+                },
+                cars: dataPagination,
+            })
+        }catch (paginateError){
+            console.log(paginateError);
+            res.status(paginateError.status).json({"message":paginateError.message});
+        }
+
     }
 
     static async sort(req, res) {
