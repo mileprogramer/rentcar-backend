@@ -1,38 +1,46 @@
 const HttpError = require("../Errors/HttpError");
+const DB = require("../database/DB");
 
 class Paginataion{
 
-    static make(dataToPaginate, page, perPage)
+    static async make(collection, page, perPage)
     {
-        page = this.validate(dataToPaginate, page);
-        let startIndex = perPage * page;
-        let data = dataToPaginate.filter((element, index) =>{
-            if(index >= startIndex && perPage !== 0){
-                perPage--;
-                return element;
+        try{
+            page = this.validatePage(page);
+        }
+        catch (error){
+            return error;
+        }
+        try{
+            let dataToPaginate = [];
+            let totalDataToPaginate = 0;
+            let startNumber = (page - 1) * perPage;
+            let endNumber = startNumber + perPage;
+            console.log(startNumber, endNumber);
+            [dataToPaginate, totalDataToPaginate] = await Promise.all([
+                DB.get(collection, startNumber, endNumber),
+                DB.getTotal(collection)
+            ]);
+            if(dataToPaginate.length === 0){
+                throw new HttpError({
+                    "status": 404,
+                    "message": "This page does not exists"
+                })
             }
-        })
-        if(data.length === 0){
-            throw new HttpError({
-                "status": 404,
-                "message": "There is not such a page",
-            });
+            return {dataToPaginate, totalDataToPaginate};
+        }catch (httpError){
+            console.log("Error in pagination make on collection", collection);
+            console.log(httpError);
+            return httpError;
         }
-        return data;
     }
-
-    static validate(data, page)
+    static validatePage(page)
     {
-        if(data.length === 0){
-            throw new HttpError({
-                "status": 404,
-                "message": "There is not data for that term"
-            })
-        }
+        page = parseInt(page);
         if(!page){
-            page = 0;
+            page = 1;
         } else if(page > 0){
-            page = parseInt(page) - 1;
+            return page;
         }
         else {
             throw new HttpError({
@@ -40,7 +48,6 @@ class Paginataion{
                 "message": "There is not such a page",
             })
         }
-        return page;
     }
 
 }
